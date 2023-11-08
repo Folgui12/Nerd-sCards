@@ -9,7 +9,6 @@ public class PlayerShootSystem : MonoBehaviour
     [SerializeField] private float maxFloatTime;
     
     [SerializeField] private GameObject projectile;
-    private PlayerAttackSystem pjAS;
     private float holdTime;
 
     private Transform weapon;
@@ -20,7 +19,6 @@ public class PlayerShootSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pjAS = GameObject.Find("RightHand").GetComponent<PlayerAttackSystem>();
         weapon = GetComponentInChildren<Transform>();
         characterMovRef = GetComponentInParent<IsometricMovement>();
     }
@@ -34,6 +32,11 @@ public class PlayerShootSystem : MonoBehaviour
         }
     }
 
+    private void ReStartHoldTime()
+    {
+        holdTime = 0;
+    }
+
     public void RangeAttack(InputAction.CallbackContext context)
     {
         if(context.started)
@@ -44,7 +47,14 @@ public class PlayerShootSystem : MonoBehaviour
         if (context.canceled)
         {
             startCount = false;
-            Instantiate(projectile, weapon.position, Quaternion.LookRotation(characterMovRef.playerLookAt.normalized, Vector3.up));
+
+            GameObject bulletTransform = Instantiate(projectile, weapon.position, Quaternion.identity);
+        
+            Vector3 projectileDir = (characterMovRef.playerLookAt - weapon.position).normalized;
+
+            bulletTransform.GetComponent<ProjectileManager>().SetUpBullet(projectileDir, holdTime);
+
+            ReStartHoldTime();
         }
     }
 }

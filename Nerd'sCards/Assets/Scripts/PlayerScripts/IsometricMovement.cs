@@ -50,7 +50,7 @@ public class IsometricMovement : MonoBehaviour
     {
         GatherInput();
         Look();
-        HandleInput();
+        HandleMouseInput();
         HandlePlayerRotation();
 
         if(!attackRef.canAttack)
@@ -82,7 +82,7 @@ public class IsometricMovement : MonoBehaviour
         rb.MovePosition(transform.position + relativePosition.normalized * relativePosition.magnitude * speed * Time.deltaTime);
     }
 
-    private void HandleInput() => aim = playerInputActions.Player.Aim.ReadValue<Vector2>();
+    private void HandleMouseInput() => aim = playerInputActions.Player.Aim.ReadValue<Vector2>();
 
     private void HandlePlayerRotation()
     {
@@ -90,11 +90,10 @@ public class IsometricMovement : MonoBehaviour
         {
             if(Mathf.Abs(aim.x) > controllerDeadZone || Mathf.Abs(aim.y) > controllerDeadZone)
             {
-                Vector3 playerDirection = Vector3.right * aim.x + Vector3.forward * aim.y;
-                playerLookAt = playerDirection;
-                if(playerDirection.sqrMagnitude > 0.0f)
+                playerLookAt = Vector3.right * aim.x + Vector3.forward * aim.y;;
+                if(playerLookAt.sqrMagnitude > 0.0f)
                 {
-                    Quaternion newRotation = Quaternion.LookRotation(playerDirection, Vector3.up);
+                    Quaternion newRotation = Quaternion.LookRotation(playerLookAt, Vector3.up);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, rotateSmoothing * Time.deltaTime);
                 }
             } 
@@ -116,9 +115,8 @@ public class IsometricMovement : MonoBehaviour
 
     private void LookAt(Vector3 lookPoint)
     {
-        Vector3 heighCorrectedPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
-        playerLookAt = heighCorrectedPoint;
-        transform.LookAt(heighCorrectedPoint);
+        playerLookAt = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
+        transform.LookAt(playerLookAt);
     }
 
     public void OnDeviceChange(PlayerInput pi)
