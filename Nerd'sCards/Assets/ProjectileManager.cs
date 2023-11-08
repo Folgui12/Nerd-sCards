@@ -15,7 +15,7 @@ public class ProjectileManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lifeTime = 4f;
+        lifeTime = 2f;
         currentLifeTime = 0f; 
     }
 

@@ -90,7 +90,7 @@ public class IsometricMovement : MonoBehaviour
         {
             if(Mathf.Abs(aim.x) > controllerDeadZone || Mathf.Abs(aim.y) > controllerDeadZone)
             {
-                playerLookAt = Vector3.right * aim.x + Vector3.forward * aim.y;;
+                playerLookAt = Vector3.right * aim.x + Vector3.forward * aim.y;
                 if(playerLookAt.sqrMagnitude > 0.0f)
                 {
                     Quaternion newRotation = Quaternion.LookRotation(playerLookAt, Vector3.up);
