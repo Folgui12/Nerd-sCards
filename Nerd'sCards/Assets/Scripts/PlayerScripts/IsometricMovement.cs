@@ -6,16 +6,15 @@ using UnityEngine.InputSystem;
 public class IsometricMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float speed;
     [SerializeField] private float controllerDeadZone = 0.1f;
     [SerializeField] private float rotateSmoothing = 1000f;
     [SerializeField] private float dashDistance;
     [SerializeField] private float dashTime;
     [SerializeField] private LayerMask invisibleWall;
+    [SerializeField] private Transform pjFront;
     public Transform currentRoom;
     public bool isGamepad;
     public Vector3 playerLookAt;
-
 
     private Vector2 aim;
     private Vector3 input;
@@ -27,12 +26,19 @@ public class IsometricMovement : MonoBehaviour
     private Vector3 relativePosition;
     private bool onMapLimit = false;
 
+    private float currentSpeed;
+    private float aimingSpeed;
+    private float normalSpeed;
+
     private void Awake()
     {
         attackRef = GetComponentInChildren<PlayerAttackSystem>();
         movementWhileAttacking = .015f;
         playerInputActions = new PlayerInputActions();
         playerInput = GetComponent<PlayerInput>();
+        normalSpeed = 6;
+        aimingSpeed = normalSpeed / 2;
+        currentSpeed = normalSpeed;
     }
 
     void OnEnable()
@@ -79,21 +85,24 @@ public class IsometricMovement : MonoBehaviour
 
     void Move()
     {
-        rb.MovePosition(transform.position + relativePosition.normalized * relativePosition.magnitude * speed * Time.deltaTime);
+        rb.MovePosition(transform.position + relativePosition.normalized * relativePosition.magnitude * currentSpeed * Time.deltaTime);
     }
 
     private void HandleMouseInput() => aim = playerInputActions.Player.Aim.ReadValue<Vector2>();
 
     private void HandlePlayerRotation()
     {
+
         if(isGamepad)
         {
             if(Mathf.Abs(aim.x) > controllerDeadZone || Mathf.Abs(aim.y) > controllerDeadZone)
             {
-                playerLookAt = Vector3.right * aim.x + Vector3.forward * aim.y;
-                if(playerLookAt.sqrMagnitude > 0.0f)
+                Vector3 dir = Vector3.right * aim.x + Vector3.forward * aim.y;
+                playerLookAt = transform.position + (pjFront.position - transform.position);
+                Debug.Log(playerLookAt);
+                if (playerLookAt.sqrMagnitude > 0.0f)
                 {
-                    Quaternion newRotation = Quaternion.LookRotation(playerLookAt, Vector3.up);
+                    Quaternion newRotation = Quaternion.LookRotation(dir, Vector3.up);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, rotateSmoothing * Time.deltaTime);
                 }
             } 
@@ -161,6 +170,16 @@ public class IsometricMovement : MonoBehaviour
             StartCoroutine(Dash());
     }
 
+    public void walkWhileAiming()
+    {
+        currentSpeed = aimingSpeed;
+    }
+
+    public void walkWhioutAiming()
+    {
+        currentSpeed = normalSpeed;
+    }
+
     IEnumerator Dash()
     {
         float startTime = Time.time;
@@ -172,6 +191,12 @@ public class IsometricMovement : MonoBehaviour
             yield return null;
         }
         
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, playerLookAt);
     }
 
 }

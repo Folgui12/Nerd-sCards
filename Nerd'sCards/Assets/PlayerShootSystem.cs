@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerShootSystem : MonoBehaviour
 {
-    [SerializeField] private float maxFloatTime;
+    [SerializeField] private float maxHoldingTime;
     
     [SerializeField] private GameObject projectile;
-    private float holdTime;
 
+    [SerializeField] private Image cooldownImage;
+
+    private float holdTime;
     private Transform weapon;
     private IsometricMovement characterMovRef;
 
@@ -21,6 +24,8 @@ public class PlayerShootSystem : MonoBehaviour
     {
         weapon = GetComponentInChildren<Transform>();
         characterMovRef = GetComponentInParent<IsometricMovement>();
+        cooldownImage.fillAmount = 0;
+        cooldownImage.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,8 +33,19 @@ public class PlayerShootSystem : MonoBehaviour
     {
         if(startCount)
         {
+            cooldownImage.gameObject.SetActive(true);
+
             holdTime += Time.deltaTime;
+
+            cooldownImage.fillAmount = holdTime / (maxHoldingTime + 1);
         }
+
+        else
+        {
+            cooldownImage.fillAmount = 0;
+            cooldownImage.gameObject.SetActive(false);
+        }
+            
     }
 
     private void ReStartHoldTime()
@@ -42,11 +58,14 @@ public class PlayerShootSystem : MonoBehaviour
         if(context.started)
         {
             startCount = true;
+            characterMovRef.walkWhileAiming();
         }
 
         if (context.canceled)
         {
             startCount = false;
+
+            characterMovRef.walkWhioutAiming();
 
             GameObject bulletTransform = Instantiate(projectile, weapon.position, Quaternion.identity);
         
