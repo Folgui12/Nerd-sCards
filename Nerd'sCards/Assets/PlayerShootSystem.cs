@@ -19,6 +19,8 @@ public class PlayerShootSystem : MonoBehaviour
 
     private bool startCount;
 
+    private Vector3 projectileDir;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +47,8 @@ public class PlayerShootSystem : MonoBehaviour
             cooldownImage.fillAmount = 0;
             cooldownImage.gameObject.SetActive(false);
         }
-            
+
+        projectileDir = (characterMovRef.playerLookAt - weapon.position).normalized;
     }
 
     private void ReStartHoldTime()
@@ -68,8 +71,6 @@ public class PlayerShootSystem : MonoBehaviour
             characterMovRef.walkWhioutAiming();
 
             GameObject bulletTransform = Instantiate(projectile, weapon.position, Quaternion.identity);
-        
-            Vector3 projectileDir = (characterMovRef.playerLookAt - weapon.position).normalized;
 
             bulletTransform.GetComponent<ProjectileManager>().SetUpBullet(projectileDir, holdTime);
 

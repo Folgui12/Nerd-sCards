@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class IsometricMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float controllerDeadZone = 0.1f;
+    [SerializeField] private float controllerDeadZone = 0.3f;
     [SerializeField] private float rotateSmoothing = 1000f;
     [SerializeField] private float dashDistance;
     [SerializeField] private float dashTime;
