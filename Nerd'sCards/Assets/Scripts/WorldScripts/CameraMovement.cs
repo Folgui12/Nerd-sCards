@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public Transform target;
-    public Vector3 offset;
-    public float smoothFactor;
-
     private IsometricMovement Player;
 
     private Transform playerCurrentRoom;
