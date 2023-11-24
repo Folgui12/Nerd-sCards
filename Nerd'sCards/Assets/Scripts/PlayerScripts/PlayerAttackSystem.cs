@@ -14,9 +14,12 @@ public class PlayerAttackSystem : MonoBehaviour
     public float currentDamage;
     public float knockBackForce;
 
+    private IsometricMovement player;
+
     // Start is called before the first frame update
     private void Start()
     {
+        player = GetComponentInParent<IsometricMovement>();
         anim = GetComponent<Animator>();
         knockBackForce = 40f;
     }
@@ -29,7 +32,7 @@ public class PlayerAttackSystem : MonoBehaviour
 
     public void MeleeAttack(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && player.hasAttack)
             PlayerAttackSO();
     }
 

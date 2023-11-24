@@ -30,6 +30,10 @@ public class IsometricMovement : MonoBehaviour
     private float aimingSpeed;
     private float normalSpeed;
 
+    [SerializeField] private bool canDash;
+    public bool canRange;
+    public bool hasAttack;
+
     private void Awake()
     {
         attackRef = GetComponentInChildren<PlayerAttackSystem>();
@@ -166,7 +170,7 @@ public class IsometricMovement : MonoBehaviour
 
     public void DetectDash(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && canDash)
             StartCoroutine(Dash());
     }
 

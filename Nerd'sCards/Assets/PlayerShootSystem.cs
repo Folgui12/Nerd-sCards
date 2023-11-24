@@ -58,23 +58,25 @@ public class PlayerShootSystem : MonoBehaviour
 
     public void RangeAttack(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if (characterMovRef.canRange)
         {
-            startCount = true;
-            characterMovRef.walkWhileAiming();
-        }
+            if(context.started)
+            {
+                startCount = true;
+                characterMovRef.walkWhileAiming();
+            }
+            if (context.canceled)
+            {
+                startCount = false;
 
-        if (context.canceled)
-        {
-            startCount = false;
+                characterMovRef.walkWhioutAiming();
 
-            characterMovRef.walkWhioutAiming();
+                GameObject bulletTransform = Instantiate(projectile, weapon.position, Quaternion.identity);
 
-            GameObject bulletTransform = Instantiate(projectile, weapon.position, Quaternion.identity);
+                bulletTransform.GetComponent<ProjectileManager>().SetUpBullet(projectileDir, holdTime);
 
-            bulletTransform.GetComponent<ProjectileManager>().SetUpBullet(projectileDir, holdTime);
-
-            ReStartHoldTime();
+                ReStartHoldTime();
+            }
         }
     }
 }
