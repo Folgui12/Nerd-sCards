@@ -109,6 +109,8 @@ GameObject:
   - component: {fileID: 4047066290157905674}
   - component: {fileID: 4047066290157905677}
   - component: {fileID: 4047066290157905676}
+  - component: {fileID: 2558435289649386878}
+  - component: {fileID: 8682159810180922720}
   m_Layer: 8
   m_Name: Hallway
   m_TagString: Untagged
@@ -192,11 +194,37 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4047066290157905679}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &2558435289649386878
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047066290157905679}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.14361231, y: 7.925727, z: 0.77578664}
+  m_Center: {x: -0.5849712, y: 3.4628634, z: 0.112106726}
+--- !u!65 &8682159810180922720
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047066290157905679}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.18631034, y: 7.417419, z: 1}
+  m_Center: {x: 0.5160076, y: 3.2087095, z: 0}
 --- !u!1 &5016478030757554333
 GameObject:
   m_ObjectHideFlags: 0

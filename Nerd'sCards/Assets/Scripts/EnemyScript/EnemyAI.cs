@@ -40,8 +40,7 @@ public class EnemyAI : MonoBehaviour
         {
             PlayerAttackSystem playerWeapon = other.gameObject.GetComponentInParent<PlayerAttackSystem>();
             TakeDamage(playerWeapon.knockBackForce, playerWeapon.currentDamage);
-        }
-            
+        }           
     }
 
     public void TakeDamage(float knockbackForce, float damageRecevied)
