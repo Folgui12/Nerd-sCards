@@ -33,6 +33,7 @@ public class IsometricMovement : MonoBehaviour
     [SerializeField] private bool canDash;
     public bool canRange;
     public bool hasAttack;
+    private Vector3 currentDir;
 
     private void Awake()
     {
@@ -63,7 +64,10 @@ public class IsometricMovement : MonoBehaviour
         HandleMouseInput();
         HandlePlayerRotation();
 
-        if(!attackRef.canAttack)
+        currentDir = Vector3.right * aim.x + Vector3.forward * aim.y;
+        playerLookAt = transform.position + (pjFront.position - transform.position);
+
+        if (!attackRef.canAttack)
             transform.Translate(Vector3.forward*movementWhileAttacking);
     }
 
@@ -101,12 +105,10 @@ public class IsometricMovement : MonoBehaviour
         {
             if(Mathf.Abs(aim.x) > controllerDeadZone || Mathf.Abs(aim.y) > controllerDeadZone)
             {
-                Vector3 dir = Vector3.right * aim.x + Vector3.forward * aim.y;
-                playerLookAt = transform.position + (pjFront.position - transform.position);
-                Debug.Log(playerLookAt);
+
                 if (playerLookAt.sqrMagnitude > 0.0f)
                 {
-                    Quaternion newRotation = Quaternion.LookRotation(dir, Vector3.up);
+                    Quaternion newRotation = Quaternion.LookRotation(currentDir, Vector3.up);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, rotateSmoothing * Time.deltaTime);
                 }
             } 
@@ -195,12 +197,6 @@ public class IsometricMovement : MonoBehaviour
             yield return null;
         }
         
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, playerLookAt);
     }
 
 }

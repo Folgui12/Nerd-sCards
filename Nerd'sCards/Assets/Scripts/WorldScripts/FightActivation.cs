@@ -38,6 +38,7 @@ public class FightActivation : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
+            Debug.Log("AskEnemy");
             Enemys.Add(other.GetComponent<EnemyAI>());
         }
 

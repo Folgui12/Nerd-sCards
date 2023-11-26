@@ -13,17 +13,24 @@ public class PlayerShootSystem : MonoBehaviour
 
     [SerializeField] private Image cooldownImage;
 
-    private float holdTime;
+    
     private Transform weapon;
     private IsometricMovement characterMovRef;
-
-    private bool startCount;
-
     private Vector3 projectileDir;
+
+
+    // Holding Shot
+    private bool startCount; 
+    private float holdTime;
+
+    // Ammunition
+    [SerializeField] private float maxAmmo;
+    private float currentAmmo;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentAmmo = maxAmmo;
         weapon = GetComponentInChildren<Transform>();
         characterMovRef = GetComponentInParent<IsometricMovement>();
         cooldownImage.fillAmount = 0;
@@ -65,8 +72,10 @@ public class PlayerShootSystem : MonoBehaviour
                 startCount = true;
                 characterMovRef.walkWhileAiming();
             }
-            if (context.canceled)
+            if (context.canceled && currentAmmo > 0)
             {
+                currentAmmo--;
+
                 startCount = false;
 
                 characterMovRef.walkWhioutAiming();

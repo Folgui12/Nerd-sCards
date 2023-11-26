@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerLifeManager : MonoBehaviour
 {
-    private int maxLife = 3;
-    private int currentLife;
+    public int maxLife;
+    public int currentLife;
 
     private IsometricMovement playerRef;
 
@@ -33,7 +33,11 @@ public class PlayerLifeManager : MonoBehaviour
     public void TakeDamage()
     {
         currentLife--;
-        if(currentLife <= 0)
+
+        HealthManager.Instance.CheckLifeStat(currentLife);
+
+        if (currentLife <= 0)
             ScreenManager.Instance.PlayerLose();
+
     }
 }

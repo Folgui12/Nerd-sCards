@@ -9,6 +9,8 @@ public class CameraMovement : MonoBehaviour
 
     private Transform playerCurrentRoom;
 
+    [SerializeField] private Vector3 offset;
+
     private void Start()
     {
         Player = FindObjectOfType<IsometricMovement>();
@@ -26,6 +28,6 @@ public class CameraMovement : MonoBehaviour
 
     private void followPlayer()
     {
-        transform.position = Player.currentRoom.position + new Vector3(-12f, 11.5f, -12);
+        transform.position = Player.currentRoom.position + offset;
     }
 }
