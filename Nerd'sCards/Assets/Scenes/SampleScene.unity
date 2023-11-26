@@ -6606,6 +6606,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 7950864236777552741, guid: 2870aad8432501d45bc36da8c37708c8, type: 3}
+      propertyPath: maxLife
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950864236777552741, guid: 2870aad8432501d45bc36da8c37708c8, type: 3}
+      propertyPath: inmuTimer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950864236777552741, guid: 2870aad8432501d45bc36da8c37708c8, type: 3}
+      propertyPath: currentLife
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1776297429461887248, guid: 2870aad8432501d45bc36da8c37708c8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2870aad8432501d45bc36da8c37708c8, type: 3}
