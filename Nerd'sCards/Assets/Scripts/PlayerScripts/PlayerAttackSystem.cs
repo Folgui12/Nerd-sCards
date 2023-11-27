@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttackSystem : MonoBehaviour
 {
-    private Animator anim;
-    public bool canAttack = true;
+    public Animator anim;
+    public bool isAttacking = false;
     public List<PlayerAttackSO> combo;
     private float lastClickedTime;
     private float lastComboEnd;
@@ -20,7 +20,6 @@ public class PlayerAttackSystem : MonoBehaviour
     private void Start()
     {
         player = GetComponentInParent<IsometricMovement>();
-        anim = GetComponent<Animator>();
         knockBackForce = 40f;
     }
 
@@ -32,17 +31,18 @@ public class PlayerAttackSystem : MonoBehaviour
 
     public void MeleeAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && player.hasAttack)
+        isAttacking = true;
+        if (context.performed)
             PlayerAttackSO();
     }
 
     private void PlayerAttackSO()
     {
-        if(Time.time - lastComboEnd > .5f && comboCounter <= combo.Count)
+        if(Time.time - lastComboEnd > 1f && comboCounter <= combo.Count)
         {
             CancelInvoke("EndCombo");
 
-            if(Time.time - lastClickedTime >= .3f)
+            if(Time.time - lastClickedTime >= .8f)
             {
                 anim.runtimeAnimatorController = combo[comboCounter].animatorOV;
                 anim.Play("Attack", 0, 0);
@@ -52,7 +52,7 @@ public class PlayerAttackSystem : MonoBehaviour
 
                 if(comboCounter >= combo.Count)
                 {
-                    EndCombo();
+                    comboCounter = 0;
                 }
                     
             }
@@ -69,6 +69,7 @@ public class PlayerAttackSystem : MonoBehaviour
 
     private void EndCombo()
     {
+        isAttacking = false;
         comboCounter = 0;
         lastComboEnd = Time.time;
         currentDamage = 0; 

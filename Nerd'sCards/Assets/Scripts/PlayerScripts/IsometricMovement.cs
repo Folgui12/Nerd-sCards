@@ -15,13 +15,12 @@ public class IsometricMovement : MonoBehaviour
     public Transform currentRoom;
     public bool isGamepad;
     public Vector3 playerLookAt;
+    public PlayerAttackSystem attackRef;
 
     private Vector2 aim;
     private Vector3 input;
-    private PlayerAttackSystem attackRef;
-    private float movementWhileAttacking;
     private PlayerInputActions playerInputActions;
-    private PlayerInput playerInput;
+    private Animator anim;
 
     private Vector3 relativePosition;
     private bool onMapLimit = false;
@@ -32,17 +31,16 @@ public class IsometricMovement : MonoBehaviour
 
     [SerializeField] private bool canDash;
     public bool canRange;
-    public bool hasAttack;
+    //public bool hasAttack;
     private Vector3 currentDir;
 
     private void Awake()
     {
         attackRef = GetComponentInChildren<PlayerAttackSystem>();
-        movementWhileAttacking = .015f;
         playerInputActions = new PlayerInputActions();
-        playerInput = GetComponent<PlayerInput>();
-        normalSpeed = 6;
-        aimingSpeed = normalSpeed / 2;
+        anim = GetComponent<Animator>();
+        normalSpeed = 8;
+        aimingSpeed = normalSpeed / 1.5f;
         currentSpeed = normalSpeed;
     }
 
@@ -66,15 +64,17 @@ public class IsometricMovement : MonoBehaviour
 
         currentDir = Vector3.right * aim.x + Vector3.forward * aim.y;
         playerLookAt = transform.position + (pjFront.position - transform.position);
-
-        if (!attackRef.canAttack)
-            transform.Translate(Vector3.forward*movementWhileAttacking);
     }
 
     private void FixedUpdate()
     {
-        if(attackRef.canAttack)
+        if(!attackRef.isAttacking && input != new Vector3(0, 0, 0))
+        {
+            anim.SetBool("IsRuning", true);
             Move();
+        }
+        else
+            anim.SetBool("IsRuning", false);
     }
 
     void GatherInput()

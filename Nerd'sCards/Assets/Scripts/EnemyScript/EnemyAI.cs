@@ -15,6 +15,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        nav = GetComponentInParent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -34,20 +35,26 @@ public class EnemyAI : MonoBehaviour
         }
     }
     
-    void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 9)
+        if (other.gameObject.layer == 7)
         {
             PlayerAttackSystem playerWeapon = other.gameObject.GetComponentInParent<PlayerAttackSystem>();
             TakeDamage(playerWeapon.knockBackForce, playerWeapon.currentDamage);
         }           
-    }
+    }*/
 
     public void TakeDamage(float knockbackForce, float damageRecevied)
     {
-        fightActive.CountEnemys();
-        anim.SetTrigger("TakeDamage");
         transform.position -= transform.forward * Time.deltaTime * knockbackForce;
         life -= damageRecevied;
+
+        if(life <= 0)
+            fightActive.CountEnemys();
+    }
+
+    private void HitAnimation()
+    {
+        anim.SetTrigger("TakeDamage");
     }
 }

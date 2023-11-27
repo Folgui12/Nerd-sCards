@@ -290,7 +290,6 @@ GameObject:
   - component: {fileID: 1776297429461887255}
   - component: {fileID: 7950864236777552741}
   - component: {fileID: 1776297429461887249}
-  - component: {fileID: 1776297429461887254}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -434,6 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bcd1e80b0fd7a04f86b059adbe6382a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inmuTimer: 0
   maxLife: 5
   currentLife: 0
 --- !u!95 &1776297429461887249
@@ -457,100 +457,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1776297429461887254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776297429461887339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 608789a4c6c776c439e67d068ba2fa85, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1776297429461887255}
-        m_TargetAssemblyTypeName: IsometricMovement, Assembly-CSharp
-        m_MethodName: OnDeviceChange
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1776297429074905415}
-        m_TargetAssemblyTypeName: PlayerAttackSystem, Assembly-CSharp
-        m_MethodName: MeleeAttack
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 4ba9ccf0-a761-4a29-9002-ffdfd6f79507
-    m_ActionName: Player/Melee Attack[/Mouse/leftButton,/Keyboard/j]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1776297428413117150}
-        m_TargetAssemblyTypeName: PlayerShootSystem, Assembly-CSharp
-        m_MethodName: RangeAttack
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 479255ba-4f34-443b-bd4f-47b6f0d8fbac
-    m_ActionName: Player/Range Attack
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7046b1fc-700c-4239-bd51-58f1dc2688cc
-    m_ActionName: Player/New action
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1776297429461887255}
-        m_TargetAssemblyTypeName: IsometricMovement, Assembly-CSharp
-        m_MethodName: DetectDash
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: edd31394-1de6-43d8-a659-e486c9d084f6
-    m_ActionName: Player/Dash[/Keyboard/leftShift,/XInputControllerWindows/leftTrigger]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &1776297429903565146
 GameObject:
   m_ObjectHideFlags: 0
