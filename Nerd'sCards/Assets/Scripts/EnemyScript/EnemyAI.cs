@@ -10,21 +10,46 @@ public class EnemyAI : MonoBehaviour
     public FightActivation fightActive;
     public float life;
     public NavMeshAgent nav;
-    private Animator anim;
+    private Animations anim;
+
+    [SerializeField] float meleeAttackDistance;
+    [SerializeField] float AttackCooldown;
+    private float AttackTimer;
+
+    public bool Active;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInParent<Animations>();
         nav = GetComponentInParent<NavMeshAgent>();
+
+        Active = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         nav.SetDestination(playerTransform.position);
-    
-        if(life <= 0)
+        anim.MoveAnim();
+
+        if (life <= 0)
             Destroy(gameObject);
+
+        AttackTimer += Time.deltaTime;
+
+
+        canAttack();
+    }
+
+    private void canAttack()
+    {
+        float Distance;
+        Distance = Vector3.Distance(playerTransform.position, transform.position);
+        if (Distance < meleeAttackDistance && AttackCooldown <= AttackTimer)
+        {
+            AttackTimer = 0;
+            anim.Attack();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -35,26 +60,14 @@ public class EnemyAI : MonoBehaviour
         }
     }
     
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 7)
-        {
-            PlayerAttackSystem playerWeapon = other.gameObject.GetComponentInParent<PlayerAttackSystem>();
-            TakeDamage(playerWeapon.knockBackForce, playerWeapon.currentDamage);
-        }           
-    }*/
-
     public void TakeDamage(float knockbackForce, float damageRecevied)
     {
         transform.position -= transform.forward * Time.deltaTime * knockbackForce;
         life -= damageRecevied;
 
+        anim.HitAnimation();
+
         if(life <= 0)
             fightActive.CountEnemys();
-    }
-
-    private void HitAnimation()
-    {
-        anim.SetTrigger("TakeDamage");
     }
 }

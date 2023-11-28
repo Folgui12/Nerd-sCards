@@ -28,9 +28,14 @@ public class FightActivation : MonoBehaviour
     public void CountEnemys()
     {
         amountOfEnemysInRoom--;
-        if(amountOfEnemysInRoom == 0)
+        Check();
+    }
+
+    private void Check()
+    {
+        if (amountOfEnemysInRoom <= 0)
         {
-           stopFight.Invoke();
+            stopFight.Invoke();
         }
     }
 
@@ -45,6 +50,14 @@ public class FightActivation : MonoBehaviour
         {
             ActivateBattle();
             startFight.Invoke();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Check();
         }
     }
 }

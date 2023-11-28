@@ -199,4 +199,12 @@ public class IsometricMovement : MonoBehaviour
         
     }
 
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(collision.gameObject.layer == 8)
+    //    {
+    //        transform.position = new Vector3(transform.position.x, collision.transform.position.y, transform.position.z);
+    //    }
+    //}
+
 }
