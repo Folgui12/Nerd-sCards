@@ -10,7 +10,6 @@ public class IsometricMovement : MonoBehaviour
     [SerializeField] private float rotateSmoothing = 1000f;
     [SerializeField] private float dashDistance;
     [SerializeField] private float dashTime;
-    [SerializeField] private LayerMask invisibleWall;
     [SerializeField] private Transform pjFront;
     public Transform currentRoom;
     public bool isGamepad;
@@ -61,9 +60,6 @@ public class IsometricMovement : MonoBehaviour
         Look();
         HandleMouseInput();
         HandlePlayerRotation();
-
-        currentDir = Vector3.right * aim.x + Vector3.forward * aim.y;
-        playerLookAt = transform.position + (pjFront.position - transform.position);
     }
 
     private void FixedUpdate()
@@ -105,6 +101,8 @@ public class IsometricMovement : MonoBehaviour
         {
             if(Mathf.Abs(aim.x) > controllerDeadZone || Mathf.Abs(aim.y) > controllerDeadZone)
             {
+                currentDir = Vector3.right * aim.x + Vector3.forward * aim.y;
+                playerLookAt = transform.position + (pjFront.position - transform.position);
 
                 if (playerLookAt.sqrMagnitude > 0.0f)
                 {

@@ -47,7 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 3051bb3dc7a2fb54aadd97b1716eca87, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 582af22b524a9af498677fe1ad18680a, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -119,7 +119,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tenista
+  m_Name: FutbolistaAmericano
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: TakeDamage
@@ -175,7 +175,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 918314bb085c68a4791be25637d8441f, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 7ab95dbde29f1ac4aa59aea0a4e1af16, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -299,7 +299,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 023a7e70920b42947a1e03859d2e1c54, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 82060b48494d95943b9a0446db6df24f, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

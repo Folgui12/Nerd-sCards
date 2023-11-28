@@ -32,8 +32,8 @@ public class EnemyAI : MonoBehaviour
         nav.SetDestination(playerTransform.position);
         anim.MoveAnim();
 
-        if (life <= 0)
-            Destroy(gameObject);
+        if (anim.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > .9f)
+            nav.isStopped = false;
 
         AttackTimer += Time.deltaTime;
 
@@ -51,23 +51,21 @@ public class EnemyAI : MonoBehaviour
             anim.Attack();
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Player")
-        {
-            //fightActive.CountEnemys();
-        }
-    }
     
     public void TakeDamage(float knockbackForce, float damageRecevied)
     {
+        nav.isStopped = true;
         transform.position -= transform.forward * Time.deltaTime * knockbackForce;
         life -= damageRecevied;
 
         anim.HitAnimation();
 
         if(life <= 0)
+        {
+            PlayerAmmoManager.Instance.currentAmmo++;
+            PlayerAmmoManager.Instance.CheckAmmoStat();
             fightActive.CountEnemys();
+            Destroy(this.gameObject);
+        }
     }
 }

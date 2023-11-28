@@ -13,26 +13,20 @@ public class PlayerShootSystem : MonoBehaviour
 
     [SerializeField] private Image cooldownImage;
 
-    
-    private Transform weapon;
-    private IsometricMovement characterMovRef;
-    private Vector3 projectileDir;
+    [SerializeField] private Animator anim;
 
+    
+    public Transform weapon;
+    public IsometricMovement characterMovRef;
+    private Vector3 projectileDir;
 
     // Holding Shot
     private bool startCount; 
     private float holdTime;
 
-    // Ammunition
-    [SerializeField] private float maxAmmo;
-    private float currentAmmo;
-
     // Start is called before the first frame update
     void Start()
     {
-        currentAmmo = maxAmmo;
-        weapon = GetComponentInChildren<Transform>();
-        characterMovRef = GetComponentInParent<IsometricMovement>();
         cooldownImage.fillAmount = 0;
         cooldownImage.gameObject.SetActive(false);
     }
@@ -55,7 +49,7 @@ public class PlayerShootSystem : MonoBehaviour
             cooldownImage.gameObject.SetActive(false);
         }
 
-        projectileDir = (characterMovRef.playerLookAt - weapon.position).normalized;
+        projectileDir = (weapon.position - transform.position).normalized;
     }
 
     private void ReStartHoldTime()
@@ -67,14 +61,19 @@ public class PlayerShootSystem : MonoBehaviour
     {
         if (characterMovRef.canRange)
         {
-            if(context.started)
+            if(context.started && PlayerAmmoManager.Instance.currentAmmo > 0)
             {
                 startCount = true;
                 characterMovRef.walkWhileAiming();
             }
-            if (context.canceled && currentAmmo > 0)
+            if (context.canceled && PlayerAmmoManager.Instance.currentAmmo > 0)
             {
-                currentAmmo--;
+
+                anim.Play("ThrowRock", 0, 0);
+
+                PlayerAmmoManager.Instance.currentAmmo--;
+
+                PlayerAmmoManager.Instance.CheckAmmoStat();
 
                 startCount = false;
 
@@ -82,7 +81,7 @@ public class PlayerShootSystem : MonoBehaviour
 
                 GameObject bulletTransform = Instantiate(projectile, weapon.position, Quaternion.identity);
 
-                bulletTransform.GetComponent<ProjectileManager>().SetUpBullet(projectileDir, holdTime);
+                bulletTransform.GetComponent<ProjectileManager>().SetUpBullet(new Vector3(projectileDir.x, 0, projectileDir.z), holdTime);
 
                 ReStartHoldTime();
             }

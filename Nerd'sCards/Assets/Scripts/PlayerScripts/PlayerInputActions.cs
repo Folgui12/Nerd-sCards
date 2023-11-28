@@ -133,6 +133,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""70fffe51-7ed5-4e15-98f6-8853dbcb1ced"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Range Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""93a42c47-4d1b-4ef8-a5d7-b205ae3c3c57"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",

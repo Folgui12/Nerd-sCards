@@ -36,24 +36,16 @@ public class ProjectileManager : MonoBehaviour
 
         if(holdTime < 1)
         {
-            damage = 2;
-            knockBackForce = 10;
-        }
-
-        else if(holdTime > 1 && holdTime < 2)
-        {
             damage = 3;
             transform.localScale *= 1.5f;
             knockBackForce = 20;
         }
-
-        else if(holdTime > 2 && holdTime < 3)
+        else if(holdTime > 1 && holdTime < 2)
         {
             damage = 4;
             transform.localScale *= 2f;
             knockBackForce = 30;
         }
-
         else
         {
             damage = 5;

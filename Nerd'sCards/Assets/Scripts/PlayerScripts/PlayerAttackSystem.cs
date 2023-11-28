@@ -15,12 +15,14 @@ public class PlayerAttackSystem : MonoBehaviour
     public float knockBackForce;
 
     private IsometricMovement player;
+    private WeaponHit ruler;
 
     // Start is called before the first frame update
     private void Start()
     {
         player = GetComponentInParent<IsometricMovement>();
         knockBackForce = 40f;
+        ruler = GetComponentInChildren<WeaponHit>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class PlayerAttackSystem : MonoBehaviour
 
     public void MeleeAttack(InputAction.CallbackContext context)
     {
+        ruler.ActiveCollider();
         isAttacking = true;
         if (context.performed)
             PlayerAttackSO();
@@ -69,6 +72,7 @@ public class PlayerAttackSystem : MonoBehaviour
 
     private void EndCombo()
     {
+        ruler.DeactiveCollider();
         isAttacking = false;
         comboCounter = 0;
         lastComboEnd = Time.time;
