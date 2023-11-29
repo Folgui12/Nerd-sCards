@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Projectile
   - Boundary
+  - Patio
   layers:
   - Default
   - TransparentFX

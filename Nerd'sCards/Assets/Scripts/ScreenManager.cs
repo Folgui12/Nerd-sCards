@@ -32,19 +32,24 @@ public class ScreenManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void StartPlaying()
+    public void GoToControls()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void PlayerWin()
+    public void StartPlaying()
     {
         SceneManager.LoadScene(2);
     }
 
-    public void PlayerLose()
+    public void PlayerWin()
     {
         SceneManager.LoadScene(3);
+    }
+
+    public void PlayerLose()
+    {
+        SceneManager.LoadScene(4);
     }
 
     public void Quit()

@@ -15,6 +15,7 @@ public class IsometricMovement : MonoBehaviour
     public bool isGamepad;
     public Vector3 playerLookAt;
     public PlayerAttackSystem attackRef;
+    public CameraMovement cameraRef;
 
     private Vector2 aim;
     private Vector3 input;
@@ -142,6 +143,17 @@ public class IsometricMovement : MonoBehaviour
         if (other.gameObject.layer == 6)
         {
             currentRoom = other.gameObject.transform;
+            if(other.gameObject.tag == "Patio")
+            {
+                cameraRef.offset = new Vector3(-30, 25, -3);
+                cameraRef.cam.orthographicSize = 20;
+            }
+            else
+            {
+                cameraRef.offset = new Vector3(-20, 18, -20);
+                cameraRef.cam.orthographicSize = 13;
+            }
+                
         }
     }
 
@@ -155,6 +167,18 @@ public class IsometricMovement : MonoBehaviour
     {
         if(collisionInfo.gameObject.tag == "Boundary")
         {
+            onMapLimit = true;
+            Debug.Log("Colliding");
+            StopCoroutine(Dash());
+            rb.AddForce(relativePosition.normalized * relativePosition.magnitude * 40 * Time.deltaTime * -1, ForceMode.Impulse);
+        }
+    }
+
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if(collisionInfo.gameObject.tag == "Boundary")
+        {
+            Debug.Log("Colliding");
             onMapLimit = true;
             StopCoroutine(Dash());
         }
@@ -170,7 +194,7 @@ public class IsometricMovement : MonoBehaviour
 
     public void DetectDash(InputAction.CallbackContext context)
     {
-        if (context.performed && canDash)
+        if (context.performed && canDash && !onMapLimit)
             StartCoroutine(Dash());
     }
 

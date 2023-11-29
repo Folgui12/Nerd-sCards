@@ -9,12 +9,14 @@ public class CameraMovement : MonoBehaviour
 
     private Transform playerCurrentRoom;
 
-    [SerializeField] private Vector3 offset;
+    public Vector3 offset;
+    public Camera cam;
 
     private void Start()
     {
         Player = FindObjectOfType<IsometricMovement>();
         playerCurrentRoom = Player.currentRoom;
+        cam = GetComponent<Camera>();
     }
 
     private void Update()
