@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5708952508612737826}
   m_Layer: 0
   m_Name: Patio_Amaca
-  m_TagString: Untagged
+  m_TagString: Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

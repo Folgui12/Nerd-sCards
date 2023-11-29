@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5442098414841903642}
   m_Layer: 0
   m_Name: AG_Planta
-  m_TagString: Untagged
+  m_TagString: Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

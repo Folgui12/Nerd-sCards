@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6962568078348594595}
   m_Layer: 0
   m_Name: Laboratorio_Armario
-  m_TagString: Untagged
+  m_TagString: Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5631008148020677019}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 81.18003, y: -37.49482, z: 4.246814}
-  m_LocalScale: {x: 123.95097, y: 169.38861, z: 423.13937}
+  m_LocalScale: {x: 74.649475, y: 102.01429, z: 254.83568}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

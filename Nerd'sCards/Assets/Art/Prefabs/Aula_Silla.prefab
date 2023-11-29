@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 1157364821407113530}
   m_Layer: 0
   m_Name: Aula_Silla
-  m_TagString: Untagged
+  m_TagString: Boundary
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2136169326827727954
 Transform:
@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652506619211593448}
-  m_LocalRotation: {x: 0.5, y: -0.49999997, z: -0.5, w: -0.5}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: -47.20977, y: 2.3400998, z: 3.0189514}
-  m_LocalScale: {x: 100, y: 100, z: 7.87686}
+  m_LocalScale: {x: 76.134995, y: 76.134995, z: 5.3294497}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!33 &3029490135074464759
 MeshFilter:
   m_ObjectHideFlags: 0
