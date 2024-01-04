@@ -9,8 +9,10 @@ public class FightActivation : MonoBehaviour
     public int amountOfEnemysInRoom = 0;
 
     [SerializeField] private UnityEvent startFight;
-    [SerializeField] private UnityEvent stopFight;
-     
+    [SerializeField] private UnityEvent stopFight; 
+
+    private bool endBattle = false;
+
     private void Start()
     {
 
@@ -18,11 +20,15 @@ public class FightActivation : MonoBehaviour
 
     void ActivateBattle()
     {
-        foreach(Behaviour thisobject in Enemys)
+        if(!endBattle)
         {
-            amountOfEnemysInRoom++;
-            thisobject.enabled = true;
+            foreach(Behaviour thisobject in Enemys)
+            {
+                amountOfEnemysInRoom++;
+                thisobject.enabled = true;
+            }
         }
+        
     }
     
     public void CountEnemys()
@@ -35,6 +41,7 @@ public class FightActivation : MonoBehaviour
     {
         if (amountOfEnemysInRoom <= 0)
         {
+            endBattle = true;
             stopFight.Invoke();
         }
     }
